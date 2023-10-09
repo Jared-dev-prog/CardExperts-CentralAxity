@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "card-experts-central-axity-client-side-solution",
+    "id": "308aa701-09c7-4fe2-9e0d-d7094ac17709",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.17.4"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "CardExperts-CentralAxity description"
+      },
+      "longDescription": {
+        "default": "CardExperts-CentralAxity description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "card-experts-central-axity Feature",
+        "description": "The feature that activates elements of the card-experts-central-axity solution.",
+        "id": "1dcdb0e3-1596-4bc5-885d-4cffea851fa4",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/card-experts-central-axity.sppkg"
+  }
+}

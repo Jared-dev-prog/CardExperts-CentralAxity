@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "card-experts-central-axity-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/cardExpertsCentralAxity/CardExpertsCentralAxityWebPart.js",
+          "manifest": "./src/webparts/cardExpertsCentralAxity/CardExpertsCentralAxityWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "CardExpertsCentralAxityWebPartStrings": "lib/webparts/cardExpertsCentralAxity/loc/{locale}.js"
+  }
+}
