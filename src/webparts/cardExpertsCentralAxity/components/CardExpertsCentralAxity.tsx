@@ -1,43 +1,51 @@
-import * as React from 'react';
-import styles from './CardExpertsCentralAxity.module.scss';
-import { ICardExpertsCentralAxityProps } from './ICardExpertsCentralAxityProps';
-import { escape } from '@microsoft/sp-lodash-subset';
+import * as React from "react";
+// import styles from './CardExpertsCentralAxity.module.scss';
+import { ICardExpertsCentralAxityProps } from "./ICardExpertsCentralAxityProps";
+import { sp } from "@pnp/sp/presets/all";
+import "@pnp/sp/lists";
 
-export default class CardExpertsCentralAxity extends React.Component<ICardExpertsCentralAxityProps, {}> {
-  public render(): React.ReactElement<ICardExpertsCentralAxityProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
-    } = this.props;
+// import { ImageHelper } from "@microsoft/sp-image-helper";
 
-    return (
-      <section className={`${styles.cardExpertsCentralAxity} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
-        </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
-      </section>
-    );
-  }
-}
+// const image = ImageHelper.convertToImageUrl(<I);
+
+
+const CardExpertsCentralAxity: React.FC<ICardExpertsCentralAxityProps> = (props) => {
+  const [urlPhoto, setUrlPhoto] = React.useState('')
+  React.useEffect(() => {
+    sp.setup({
+      sp: {
+        baseUrl:
+          "https://intellego365.sharepoint.com/sites/CentralAxity/M%C3%A9xico/Consultoria2/Aplicaciones/Expertos",
+      },
+    });
+
+    sp.web.lists
+      .getByTitle("listaExpertos")
+      .items.get()
+      .then((response: any) => {
+        const photoObject = JSON.parse(response[0].photo);
+        console.log(response);
+        console.log(photoObject);
+        const url = `${photoObject.serverUrl}${photoObject.serverRelativeUrl}`;
+        setUrlPhoto(url)
+        console.log(urlPhoto);
+      })
+      .catch((error) => {
+        console.error("Error al obtener elementos de la lista:", error);
+      });
+  }, []);
+
+  // const resizedImage = ImageHelper.convertToImageUrl({
+  //   sourceUrl: "",
+  //   width: 200,
+  // });
+
+  return (
+    <div>
+      <h3>Card Experts</h3>
+      <img src={urlPhoto} alt="" width={200} />
+    </div>
+  );
+};
+
+export default CardExpertsCentralAxity;
