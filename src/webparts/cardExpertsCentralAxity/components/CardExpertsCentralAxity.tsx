@@ -1,16 +1,13 @@
 import * as React from "react";
 // import styles from './CardExpertsCentralAxity.module.scss';
-import { ICardExpertsCentralAxityProps } from "./ICardExpertsCentralAxityProps";
+import { ICardExpertsCentralAxityProps, IExpert } from "./ICardExpertsCentralAxityProps";
 import { sp } from "@pnp/sp/presets/all";
 import "@pnp/sp/lists";
-
-// import { ImageHelper } from "@microsoft/sp-image-helper";
-
-// const image = ImageHelper.convertToImageUrl(<I);
-
+import CardExpert from "./CardExpert";
+import styles from "./CardExpertsCentralAxity.module.scss";
 
 const CardExpertsCentralAxity: React.FC<ICardExpertsCentralAxityProps> = (props) => {
-  const [urlPhoto, setUrlPhoto] = React.useState('')
+  const [experts, setExperts] = React.useState<IExpert[]>([]);
   React.useEffect(() => {
     sp.setup({
       sp: {
@@ -22,28 +19,35 @@ const CardExpertsCentralAxity: React.FC<ICardExpertsCentralAxityProps> = (props)
     sp.web.lists
       .getByTitle("listaExpertos")
       .items.get()
-      .then((response: any) => {
-        const photoObject = JSON.parse(response[0].photo);
-        console.log(response);
-        console.log(photoObject);
-        const url = `${photoObject.serverUrl}${photoObject.serverRelativeUrl}`;
-        setUrlPhoto(url)
-        console.log(urlPhoto);
+      .then((response) => {
+        setExperts(response);
       })
       .catch((error) => {
         console.error("Error al obtener elementos de la lista:", error);
       });
   }, []);
 
-  // const resizedImage = ImageHelper.convertToImageUrl({
-  //   sourceUrl: "",
-  //   width: 200,
-  // });
-
   return (
     <div>
       <h3>Card Experts</h3>
-      <img src={urlPhoto} alt="" width={200} />
+      <div className={styles.container}>
+        {experts !== undefined
+          ? experts.map((expert) => (
+              <CardExpert
+                key={expert.Id}
+                NumberStarts={expert.NumberStarts}
+                SoftSkills={expert.SoftSkills}
+                TechnicalSkills={expert.TechnicalSkills}
+                description={expert.description}
+                email={expert.email}
+                name={expert.name}
+                photo={expert.photo}
+                position={expert.position}
+                yearsExperience={expert.yearsExperience}
+              />
+            ))
+          : ""}
+      </div>
     </div>
   );
 };
