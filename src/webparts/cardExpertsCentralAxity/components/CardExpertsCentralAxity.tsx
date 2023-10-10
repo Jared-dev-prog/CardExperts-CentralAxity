@@ -29,7 +29,6 @@ const CardExpertsCentralAxity: React.FC<ICardExpertsCentralAxityProps> = (props)
 
   return (
     <div>
-      <h3>Card Experts</h3>
       <div className={styles.container}>
         {experts !== undefined
           ? experts.map((expert) => (
