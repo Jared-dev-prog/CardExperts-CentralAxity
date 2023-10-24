@@ -3,7 +3,7 @@
   "solution": {
     "name": "card-experts-central-axity-client-side-solution",
     "id": "308aa701-09c7-4fe2-9e0d-d7094ac17709",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -30,7 +30,7 @@
         "title": "card-experts-central-axity Feature",
         "description": "The feature that activates elements of the card-experts-central-axity solution.",
         "id": "1dcdb0e3-1596-4bc5-885d-4cffea851fa4",
-        "version": "1.0.0.0"
+        "version": "1.0.0.1"
       }
     ]
   },

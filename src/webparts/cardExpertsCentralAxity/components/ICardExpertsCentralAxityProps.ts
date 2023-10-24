@@ -4,6 +4,7 @@ export interface ICardExpertsCentralAxityProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  absoluteUrl: string;
 }
 
 export interface IExpertProps {
@@ -16,6 +17,7 @@ export interface IExpertProps {
   photo: string;
   position: string;
   yearsExperience: number;
+  Expeciality: string;
 }
 
 export interface IExpert extends IExpertProps {
